@@ -9,8 +9,8 @@ let weather = {
     )
       .then((response) => {
         if (!response.ok) {
-          alert("No weather found.");
-          throw new Error("No weather found.");
+          alert("Результаты не найдены.");
+          throw new Error("Результаты не найдены.");
         }
         return response.json();
       })
@@ -19,20 +19,17 @@ let weather = {
   displayWeather: function (data) {
     const { name } = data;
     const { icon, description } = data.weather[0];
-    const { temp, humidity } = data.main;
+    const { temp, feels_like, humidity } = data.main;
     const { speed } = data.wind;
-    document.querySelector(".city").innerText = "Погода в " + name;
-    document.querySelector(".icon").src =
-      "https://openweathermap.org/img/wn/" + icon + ".png";
+    document.querySelector(".city").innerText = "Погода в городе " + name;
+    document.querySelector(".icon").src = "https://openweathermap.org/img/wn/" + icon + ".png";
     document.querySelector(".description").innerText = description;
     document.querySelector(".temp").innerText = temp + "°C";
-    document.querySelector(".humidity").innerText =
-      "Влажность: " + humidity + "%";
-    document.querySelector(".wind").innerText =
-      "Скорость ветра: " + speed + " км/ч";
+    document.querySelector(".feels-like").innerText = "Ощущается как " + feels_like + "°C";
+    document.querySelector(".humidity").innerText = "Влажность: " + humidity + "%";
+    document.querySelector(".wind").innerText = "Скорость ветра: " + speed + " км/ч";
     document.querySelector(".weather").classList.remove("loading");
-    document.body.style.backgroundImage =
-      "url('https://source.unsplash.com/1900x960/?" + name + "')";
+    document.body.style.backgroundImage = "url('https://source.unsplash.com/1900x960/?" + name + "')";
   },
   search: function () {
     this.fetchWeather(document.querySelector(".search__bar").value);
@@ -51,4 +48,4 @@ document
     }
   });
 
-weather.fetchWeather("Санкт Петербург");
+
