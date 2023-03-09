@@ -48,4 +48,4 @@ document
     }
   });
 
-
+weather.fetchWeather("Санкт Петербург");
